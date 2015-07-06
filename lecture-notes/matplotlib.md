@@ -79,3 +79,7 @@ plt.legend(loc=9)
 [TODO: show pic]
 
 If you specify labels, you can get a legend as shown.
+
+# For More
+
+Read the matplotlib documentation, there's a ton of it.

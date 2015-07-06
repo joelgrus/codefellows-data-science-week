@@ -275,4 +275,95 @@ plt.show()
 
 # Decision Tree
 
-A decision tree splits the dataset on its various attributes and
+A decision tree splits the dataset on its various attributes and uses that
+to create a prediction.
+
+[TODO: pic of decision tree]
+
+It can be a good choice when you have a lot of qualitative attributes.
+
+```
+play_tennis = [
+ {'id':'d1','outlook':'sunny','temp':'hot','humidity':'high','wind':'weak','play':'-'},
+ {'id':'d2','outlook':'sunny','temp':'hot','humidity':'high','wind':'strong','play':'-'},
+ {'id':'d3','outlook':'overcast','temp':'hot','humidity':'high','wind':'weak','play':'+'},
+ {'id':'d4','outlook':'rain','temp':'mild','humidity':'high','wind':'weak','play':'+'},
+ {'id':'d5','outlook':'rain','temp':'cool','humidity':'normal','wind':'weak','play':'+'},
+ {'id':'d6','outlook':'rain','temp':'cool','humidity':'normal','wind':'strong','play':'-'},
+ {'id':'d7','outlook':'overcast','temp':'cool','humidity':'normal','wind':'strong','play':'+'},
+ {'id':'d8','outlook':'sunny','temp':'mild','humidity':'high','wind':'weak','play':'-'},
+ {'id':'d9','outlook':'sunny','temp':'cool','humidity':'normal','wind':'weak','play':'+'},
+ {'id':'d10','outlook':'rain','temp':'mild','humidity':'normal','wind':'weak','play':'+'},
+ {'id':'d11','outlook':'sunny','temp':'mild','humidity':'normal','wind':'strong','play':'+'},
+ {'id':'d12','outlook':'overcast','temp':'mild','humidity':'high','wind':'strong','play':'+'},
+ {'id':'d13','outlook':'overcast','temp':'hot','humidity':'normal','wind':'weak','play':'+'},
+ {'id':'d14','outlook':'rain','temp':'mild','humidity':'high','wind':'strong','play':'-'}
+]
+
+df = DataFrame.from_dict(play_tennis)
+humidity   id   outlook play  temp    wind
+0      high   d1     sunny    -   hot    weak
+1      high   d2     sunny    -   hot  strong
+2      high   d3  overcast    +   hot    weak
+3      high   d4      rain    +  mild    weak
+4    normal   d5      rain    +  cool    weak
+5    normal   d6      rain    -  cool  strong
+6    normal   d7  overcast    +  cool  strong
+7      high   d8     sunny    -  mild    weak
+8    normal   d9     sunny    +  cool    weak
+9    normal  d10      rain    +  mild    weak
+10   normal  d11     sunny    +  mild  strong
+11     high  d12  overcast    +  mild  strong
+12   normal  d13  overcast    +   hot    weak
+13     high  d14      rain    -  mild  strong
+```
+
+scikit-learn doesn't like categorical variables, only numeric ones.
+We can fix this with `get_dummies`:
+
+```
+categories = Series(['a', 'b', 'c', 'a'])
+0    a
+1    b
+2    c
+3    a
+dtype: object
+
+pd.get_dummies(categories)
+
+   a  b  c
+0  1  0  0
+1  0  1  0
+2  0  0  1
+3  1  0  0
+```
+And then apply to only the columns we want:
+
+```
+x = pd.get_dummies(df[['humidity', 'outlook', 'temp', 'wind']])
+y = df['play'].values
+```
+
+and now create the decision tree.  At this point the scikit-learn workflow
+should be pretty old hat:
+
+```
+from sklearn.tree import DecisionTreeClassifier
+model = DecisionTreeClassifier()
+model.fit(x, y)
+```
+
+And now we can compare the predictions with the actual:
+
+```
+In [38]: y == model.predict(x)
+Out[38]:
+array([ True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True], dtype=bool)
+```
+
+[TODO: add pic of tree]
+
+Decision trees have an unfortunate tendency to overfit.  We frequently instead
+use `sklearn.ensemble.RandomForestClassifier`, which builds different
+decision trees off different subsets of the data and combines them.
