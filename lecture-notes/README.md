@@ -8,4 +8,5 @@ The intended order is
 * scikit_learn.md
 * javascript.md
 * c3.md
-* data_driven_sites.md
+
+This doesn't agree exactly with how we broke down the topics...

@@ -4,6 +4,7 @@
 
 It's the primary programming language of the web.
 It has nothing to do with Java.
+To build data driven sites, we'll need to know some JavaScript.
 
 # What is Javascript
 
@@ -202,9 +203,9 @@ function callback(serialized) {
 }
 ```
 
-# Putting it all together:
+# Putting it all together to make a data driven site:
 
 * Create a Flask application that serves data at URLs
 * Create an HTML page with some controls and some JS code
-* Have the JS code make ajax calls to the Flash application
+* Have the JS code make ajax calls to the Flask application
 * Use callbacks to modify the page when the data returns
