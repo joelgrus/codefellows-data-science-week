@@ -80,7 +80,8 @@ to keep it really simple.
 
 It's pretty straightforward to define functions:
 
-```function addOne(x) {
+```
+function addOne(x) {
   return x + 1;
 }
 ```
