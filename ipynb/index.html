@@ -1,0 +1,92 @@
+<!doctype html>
+<title>Find the Stations</title>
+<head>
+  <link href="app.css" rel="stylesheet">
+  <!-- Load c3.css -->
+  <link href="c3.css" rel="stylesheet" type="text/css">
+
+  <!-- Load d3.js and c3.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js" charset="utf-8"></script>
+  <script src="c3.min.js"></script>
+</head>
+<body>
+  <span id="station-name">Search for a station:</span>
+  <div id="graph"></div>
+  <input id="fragment">
+  <div id="stations"></div>
+  <script>
+    (function() {
+      // hardcode the path to flask
+      var FLASK_URL = 'http://127.0.0.1:5000';
+
+      // from http://stackoverflow.com/questions/8567114/how-to-make-an-ajax-call-without-jquery/18324384#18324384
+      function callAjax(url, callback){
+          var xmlhttp;
+          // compatible with IE7+, Firefox, Chrome, Opera, Safari
+          xmlhttp = new XMLHttpRequest();
+          xmlhttp.onreadystatechange = function(){
+              if (xmlhttp.readyState == 4 && xmlhttp.status == 200){
+                  callback(xmlhttp.responseText);
+              }
+          }
+          xmlhttp.open("GET", url, true);
+          xmlhttp.send();
+      }
+
+      // whenever the fragment changes, update the stations
+      var fragment = document.getElementById("fragment");
+      fragment.addEventListener('keyup', updateStations);
+
+      function updateStations() {
+        var url = FLASK_URL + '/stations/' + fragment.value;
+        callAjax(url, function(blob) {
+          stations = JSON.parse(blob);
+
+          var div = document.getElementById("stations");
+
+          // clear its children
+          while (div.firstChild) {
+            div.removeChild(div.firstChild);
+          }
+
+          // and then loop over the points, creating a circle for each
+          for (var i = 0; i < stations.length; i++) {
+            var station = stations[i];
+
+            var stationParagraph = document.createElement('p');
+            var t = document.createTextNode(station);
+            stationParagraph.appendChild(t);
+            stationParagraph.addEventListener("click", updateGraph(station));
+            div.appendChild(stationParagraph);
+          }
+        });
+      }
+
+      // draw chart, with no data at first
+      var chart = c3.generate({
+          bindto: '#graph',
+          data: { x: 'x', columns: [] },
+          axis: { x: { type: 'timeseries',
+                       tick: { format: '%Y-%m-%d', count: 13 } } }
+      });
+
+      function updateGraph(station) {
+        return function() {
+          var url = FLASK_URL + '/station/' + encodeURIComponent(station);
+          callAjax(url, function(blob) {
+            var data = JSON.parse(blob);
+            chart.load({
+              columns: [['x'].concat(data.x), ['rides'].concat(data.y)]
+            });
+
+            var title = document.getElementById("station-name");
+            title.innerHTML = station;
+          });
+        }
+      }
+
+      updateStations();
+
+    })();
+  </script>
+</body>
