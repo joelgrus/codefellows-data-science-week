@@ -83,3 +83,34 @@ If you specify labels, you can get a legend as shown.
 # For More
 
 Read the matplotlib documentation, there's a ton of it.
+
+# Plotting from pandas
+
+You can also plot from pandas.
+
+```
+x = Series(np.random.randn(10))
+x.plot()
+plt.show()
+```
+
+[TODO: image]
+
+Which is especially nice for histograms:
+
+```
+x = Series(np.random.randn(100))
+x.hist()
+plt.show()
+```
+
+You can also do scatter plots:
+
+```
+y = Series(np.random.randn(100))
+df = DataFrame({ 'a' : x, 'b' : y })
+df.plot(kind='scatter', x='a', y='b')
+plt.show()
+```
+
+And many, many more, check the documentation as always.
