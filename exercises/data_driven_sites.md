@@ -35,4 +35,11 @@ refresh the list of stations whenever the input changes ('keyup').
 The other will watch the station names and (make an ajax call to)
 refresh the graph whenever someone clicks on a station name.
 
-4. If you're really committed, you can use CSS to make the site look really nice.
+4. The station names have lots of &s and /s in them.
+These are tricky to pass in as URL parameters.  Either you'll need to
+use some kind of surrogate keys, or else you'll need to use
+
+`encodeURIComponent` (on the javascript side), and
+`urllib.unquote` (on the python side)
+
+5. If you're really committed, you can use CSS to make the site look really nice.
