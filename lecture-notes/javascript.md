@@ -205,7 +205,7 @@ function callback(serialized) {
 
 # Putting it all together to make a data driven site:
 
-* Create a Flask application that serves data at URLs
+* Create a Pyramid application that serves data at URLs
 * Create an HTML page with some controls and some JS code
-* Have the JS code make ajax calls to the Flask application
+* Have the JS code make ajax calls to the Pyramid application
 * Use callbacks to modify the page when the data returns

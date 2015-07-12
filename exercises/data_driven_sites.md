@@ -20,12 +20,12 @@ daily rental counts for that stop.
 
 This is a somewhat open-ended problem.  Here are some thoughts:
 
-1. You'll need a Flask server with two different routes.  One should take
+1. You'll need a Pyramid server with two different routes.  One should take
 a text snippet and return the list of stations that match that snippet
 (`re.search` might be your friend).  The other should take a station name
 and return the time series of daily rental counts for that station.
 
-2. To do that, your Flask server will probably need to use some `pandas`.
+2. To do that, your Pyramid server will probably need to use some `pandas`.
 So that the website will be snappy, you probably want to precompute
 the time series for each station, and also the list of stations.
 

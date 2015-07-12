@@ -76,6 +76,98 @@ In [76]: b_train
 Out[76]: [2, 0, 3]
 ```
 
+# The scikit-learn workflow
+
+```
+# create the model
+model = SomeModel(parameter1=1, parameter2=2)
+
+# train the model using inputs and known outputs
+model.train(x_train, y_train)
+
+# create predictions from new data
+predictions = model.predict(x_test)
+
+# see how we did
+plt.scatter(predictions, y_test)
+```
+
+# Measuring Performance
+
+How do we know how good our model is?  Looking at the scatterplot is good,
+but for various types of models we can look at different measures:
+
+# Mean Square Error
+
+Each test prediction has an *error* compared to its actual value.
+If we just average the errors, positive and negative errors might cancel
+each other out.  So sometimes we look at the *mean square error*.
+
+```
+from sklearn.metrics import mean_squared_error
+mse = mean_squared_error(y_test, predictions)
+```
+
+It's not clear what this number means on its own, but you can use it to compare
+different models.
+
+# R-squared
+
+The R^2 value measures how much of the variation in the y-value is captured
+by the model.  It is defined as
+
+1 - SS_residual / SS_total
+
+where SS_residual is the *total* squared error of our predictions,
+and SS_total is the total squared variation of the actual values (relative to their mean).
+
+If this number is 1, SS_residual must be 0, which means we predicted perfectly.
+If this number is 0, SS_residual equals SS_total, which is just how you'd do
+if you predicted the mean of the test data.  If this number is negative, it means
+that you're doing worse than just predicting the mean of the test data.
+
+```
+from sklearn.metrics import r2_score
+r2 = r2_score(y_test, predictions)
+```
+
+# Confusion Matrix
+
+For classification problems, the confusion matrix shows how many inputs
+in each class were classified into each class. Imagine the simple case where
+we are classifying things as either `True` or `False`.  The confusion matrix
+consists of the counts
+
+```
+[[TP, FN],
+ [FP, TN]]
+```
+
+where TP is the true positives (predict True, actual True), FN is the false
+negatives (predict False, actual True), FP is the false positives (predict True,
+actual False), and TN is the true negatives (predict False, actual False).
+
+```
+from sklearn.metrics import confusion_matrix
+cm = confusion_matrix(y_test, predicted)
+```
+
+# Precision and Recall
+
+Still in the case of classification, we often speak about precision and recall.
+Precision is the fraction of positive predictions that are *correct*; recall is
+the fraction of positive examples that we predicted positive. That is,
+
+Precision = TP / (TP + FP)
+
+Recall = TP / (TP + FN)
+
+```
+from sklearn.metrics import precision_score, recall_score
+precision = precision_score(y_test, predicted)
+recall = recall_score(y_test, predicted)
+```
+
 # A Tour Of Some Common Machine Learning Models
 
 # k Means Clustering

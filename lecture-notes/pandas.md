@@ -327,8 +327,6 @@ min      7.0000    13.000000
 max     30.0000  1000.000000
 ```
 
-
-
 # Number of distinct items:
 
 ```
