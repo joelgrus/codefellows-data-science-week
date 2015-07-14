@@ -100,4 +100,4 @@ If you go to that URL, you'll see a list of notebooks, and options to create new
 # See Also
 
 IPython can do lots more, one could probably teach a week course just on
-IPython.  Read the documentation.
+IPython.  [Read the documentation](http://ipython.org/documentation.html).
