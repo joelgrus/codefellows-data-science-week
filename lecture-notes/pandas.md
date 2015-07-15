@@ -524,4 +524,4 @@ Name: East, dtype: int64
 
 # And more
 
-There's so much more you can do with pandas, check out the extensive documentation.
+There's so much more you can do with pandas, check out [the extensive documentation](http://pandas.pydata.org/pandas-docs/stable/).
