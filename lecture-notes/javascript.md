@@ -175,12 +175,11 @@ and pass it to the callback function.
 When we transfer data (say, from a web service to a web page), it needs to be
 serialized to text.  This is commonly done with JSON, the JavaScript Object Notation.
 
-In particular, say we are building a Flask server to return an array of points:
+In particular, say we are building a python server to return an array of points:
 
 ```
-@app.route('/points/')
 def points():
-    points = [{'x' : 1, 'y' : 2}, {'x' : 3, 'y' : 4}]
+    ps = [{'x' : 1, 'y' : 2}, {'x' : 3, 'y' : 4}]
     return ???
 ```
 
@@ -188,7 +187,10 @@ we can't return Python lists or dicts, so we need to serialize it to JSON.
 
 ```
 import json
-serialized = json.dumps(points)
+
+def points():
+    ps = [{'x' : 1, 'y' : 2}, {'x' : 3, 'y' : 4}]
+    return json.dumps(ps)
 ```
 
 Then in the JavaScript callback, we need to deserialize it

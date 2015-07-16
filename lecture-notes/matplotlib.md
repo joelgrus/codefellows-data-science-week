@@ -59,6 +59,7 @@ wants them.
 ```
 plt.bar(range(10), np.random.rand(10))
 plt.title("A random bar chart")
+plt.show()
 ```
 
 [TODO: show pic]
@@ -69,11 +70,12 @@ You can supply a lot of (cryptic) options to matplotlib.  For instance,
 you can specify `color`, `marker`, and `label` for each series you plot.
 
 ```
-s = range(10)
+xs = range(10)
 plt.scatter(xs, 5 * np.random.rand(10) + xs, color='r', marker='*', label='series1')
 plt.scatter(xs, 5 * np.random.rand(10) + xs, color='g', marker='o', label='series2')
 plt.title("A scatterplot with two series")
 plt.legend(loc=9)
+plt.show()
 ```
 
 [TODO: show pic]
