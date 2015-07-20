@@ -23,9 +23,8 @@ plt.xlabel("This is just an x-axis")
 plt.ylabel("This is just a y-axis")
 plt.show()
 ```
-![A Simple Chart][simple_chart]
 
-[simple_chart]: https://raw.githubusercontent.com/joelgrus/codefellows-data-science-week/master/images/1_making_charts.png
+![A Simple Chart][simple_chart]
 
 as you can see, `plt.plot` plots line[s] connecting the points you give it.
 
@@ -64,7 +63,7 @@ plt.title("A random bar chart")
 plt.show()
 ```
 
-[TODO: show pic]
+![A Bar Chart from Random Data][random_bars]
 
 # Scatter Plots
 
@@ -80,13 +79,14 @@ plt.legend(loc=9)
 plt.show()
 ```
 
-[TODO: show pic]
+![A random scatter plot with two data series][scatter_series]
 
 If you specify labels, you can get a legend as shown.
 
 # For More
 
-Read the matplotlib documentation, there's a ton of it.
+Read the [matplotlib documentation](http://matplotlib.org/contents.html),
+there's a ton of it.
 
 # Plotting from pandas
 
@@ -98,7 +98,7 @@ x.plot()
 plt.show()
 ```
 
-[TODO: image]
+![Plotting from pandas][pandas_plot]
 
 Which is especially nice for histograms:
 
@@ -107,6 +107,8 @@ x = Series(np.random.randn(100))
 x.hist()
 plt.show()
 ```
+
+![Pandas-generated Histogram][pandas_hist]
 
 You can also do scatter plots:
 
@@ -117,4 +119,15 @@ df.plot(kind='scatter', x='a', y='b')
 plt.show()
 ```
 
-And many, many more, check the documentation as always.
+![Pandas-generated Scatter Plot][pandas_scatter]
+
+And many, many more, [check the documentation](http://pandas.pydata.org/pandas-docs/stable/visualization.html) as always.
+
+
+
+[simple_chart]: https://raw.githubusercontent.com/joelgrus/codefellows-data-science-week/master/images/1_making_charts.png
+[random_bars]: https://raw.githubusercontent.com/joelgrus/codefellows-data-science-week/master/images/2_bar_charts.png
+[scatter_series]: https://raw.githubusercontent.com/joelgrus/codefellows-data-science-week/master/images/3_scatter_plots.png
+[pandas_plot]: https://raw.githubusercontent.com/joelgrus/codefellows-data-science-week/master/images/4_plotting_from_pandas.png
+[pandas_hist]: https://raw.githubusercontent.com/joelgrus/codefellows-data-science-week/master/images/5_hist.png
+[pandas_scatter]: https://raw.githubusercontent.com/joelgrus/codefellows-data-science-week/master/images/6_pandas_scatter_plots.png
