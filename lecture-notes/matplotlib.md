@@ -23,7 +23,9 @@ plt.xlabel("This is just an x-axis")
 plt.ylabel("This is just a y-axis")
 plt.show()
 ```
-![A Simple Chart][https://raw.githubusercontent.com/joelgrus/codefellows-data-science-week/master/images/1_making_charts.png]
+![A Simple Chart][simple_chart]
+
+[simple_chart]: https://raw.githubusercontent.com/joelgrus/codefellows-data-science-week/master/images/1_making_charts.png
 
 as you can see, `plt.plot` plots line[s] connecting the points you give it.
 
